@@ -24,7 +24,7 @@ class FaceMyData(Dataset):
         # img_data = img_data[...,::,-1]
 
         img_data = img_data.transpose([2, 0, 1])
-        print(img_data.shape)
+        print(img_data.shape) # [96,96,3]
         # img_data = (img_data / 255.).astype(np.float32)  # (0,1)
         img_data = ((img_data / 255. - 0.5) * 2).astype(np.float32)  # (-1,1)
 
