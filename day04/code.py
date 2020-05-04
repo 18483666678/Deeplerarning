@@ -4,6 +4,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFilter
 from PIL import ImageFont
+import os
 
 
 def randomChar():
@@ -14,27 +15,42 @@ def randomChar():
     return chr(random.randint(48, 57))
 
 
+def randomNum():
+    """
+    随机数字
+    :return:
+    """
+    a = str(random.randint(0, 9))
+    a = chr(random.randint(48, 57))  # ASCII编码表
+    b = chr(random.randint(65, 90))  # 大写字母
+    c = chr(random.randint(97, 122))  # 小写字母
+    d = ord(a)
+    return a
+
+
 def randomBgColor():
     '''
+    Color1
     随机生成验证码的背景色
     :return:
     '''
-    return (random.randint(50, 100), random.randint(50, 100), random.randint(50, 100))
+    return (random.randint(65, 255), random.randint(65, 255), random.randint(65, 255))
 
 
 def randomTextColor():
     '''
+    Color2
     随机生成验证码的文字颜色
     :return:
     '''
-    return (random.randint(120, 200), random.randint(120, 200), random.randint(120, 200))
+    return (random.randint(32, 127), random.randint(32, 127), random.randint(32, 127))
 
 
-w = 30 * 4
+w = 60 * 4
 h = 60
 
 # 设置字体类型及大小
-font = ImageFont.truetype(font=r'D:\PycharmProjects\seq2seq10_24\arial.ttf', size=36)
+font = ImageFont.truetype(font='C:\\Windows\\Fonts\\arial.ttf', size=40)
 
 for _ in range(500):
     # 创建一张图片，指定图片mode，长宽
@@ -48,14 +64,17 @@ for _ in range(500):
             draw.point((x, y), fill=randomBgColor())
 
     # 将随机生成的chr，draw如image
-    filename = []
-    for t in range(4):
-        ch = randomChar()
-        filename.append(ch)
-        draw.text((30 * t, 10), ch, font=font, fill=randomTextColor())
+    filename = ""
+    for j in range(4):
+        ch = randomNum()
+        filename += ch
+        draw.text((60 * j + 10, 10), ch, font=font, fill=randomTextColor())
 
     # 设置图片模糊
-    # image = image.filter(ImageFilter.BLUR)
+    image = image.filter(ImageFilter.BLUR)
     # 保存图片
-    image_path = r"D:\PycharmProjects\seq2seq10_24\code"
-    image.save("{0}/{1}.jpg".format(image_path,"".join(filename)))
+    image_path = "./code"
+    if not os.path.exists(image_path):
+        os.makedirs(image_path)
+    # print("{0}/{1}.jpg".format(image_path, filename))
+    image.save("{0}/{1}.jpg".format(image_path, filename))
