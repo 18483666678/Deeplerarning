@@ -35,8 +35,8 @@ class Trainer:
                 accuracy = int(bool) / tag.size(0)
 
                 print(f"epoch:{epoch}/{EPOCHS} | loss:{loss} | accuracy:{accuracy}")
-                print('output:', output[:4].item())
-                print("label:", tag[:4].item())
+                print('output:', output[:4])
+                print("label:", tag[:4])
 
 
 
