@@ -11,6 +11,7 @@ tf = transforms.Compose([
 class MyDataset(Dataset):
     def __init__(self,root,img_size):
         self.root_dir = root
+        self.img_size = img_size
         self.dataset = []
 
         # positive_file = open(f"{root}/{img_size}/positive.txt","r")
@@ -45,11 +46,11 @@ class MyDataset(Dataset):
         img_path = None
 
         if strs[1] == "1":
-            img_path = f"{self.root_dir}/positive/{strs[0]}"
+            img_path = f"{self.root_dir}/{self.img_size}/positive/{strs[0]}"
         elif strs[1] == "2":
-            img_path = f"{self.root_dir}/negative/{strs[0]}"
+            img_path = f"{self.root_dir}/{self.img_size}/negative/{strs[0]}"
         else:
-            img_path = f"{self.root_dir}/part/{strs[0]}"
+            img_path = f"{self.root_dir}/{self.img_size}/part/{strs[0]}"
 
         img_data = tf(Image.open(img_path))
         print(img_data.shape)
