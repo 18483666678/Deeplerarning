@@ -35,12 +35,12 @@ class Train:
                 c_mask = tag[:, 0] < 2
                 c_predict = predict[c_mask]
                 c_tag = tag[c_mask]
-                loss_c = torch.mean((c_predict[:, 0] - c_tag[:, 0] ** 2))
+                loss_c = torch.mean((c_predict[:, 0] - c_tag[:, 0]) ** 2)
 
                 off_mask = tag[:, 0] > 0
                 off_predict = predict[off_mask]
                 off_tag = tag[off_mask]
-                loss_off = torch.mean((c_predict[:, 1:] - c_tag[:, 0]) ** 2)
+                loss_off = torch.mean((off_predict[:, 1:] - off_tag[:, 1:]) ** 2)
 
                 loss = loss_c + loss_off
 
