@@ -56,7 +56,7 @@ class MyDataset(Dataset):
         print(img_data.shape)
         c,x1,y1,x2,y2 = float(strs[1]),float(strs[2]),float(strs[3]),float(strs[4]),float(strs[5])
 
-        return img_data,np.array([c,x1,y1,x2,y2],dtype=np.float)
+        return img_data,np.array([c,x1,y1,x2,y2],dtype=np.float32())
 
 if __name__ == '__main__':
     dataset = MyDataset(r"",12)
